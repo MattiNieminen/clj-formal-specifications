@@ -4,7 +4,7 @@
             [formal-specifications.examples.coin :refer :all]))
 
 (defn heads-or-tails?
-  "Returns true of coin is either :heads or :tails."
+  "Returns true if coin is either :heads or :tails."
   [coin]
   (some #{coin} [:heads :tails]))
 
