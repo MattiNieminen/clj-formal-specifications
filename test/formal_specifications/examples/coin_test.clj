@@ -6,7 +6,7 @@
 (defn heads-or-tails?
   "Returns true of coin is either :heads or :tails."
   [coin]
-  (some #(= coin %) [:heads :tails]))
+  (some #{coin} [:heads :tails]))
 
 (deftest flip-action-test
   (is (heads-or-tails? (spec/execute (flip-action)))))
