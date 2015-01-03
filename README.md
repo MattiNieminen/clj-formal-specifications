@@ -1,6 +1,6 @@
-# clj-formal-specifications
+# formal-specifications
 
-A Clojure library for creating executable formal specifications.
+A library for creating and executing formal specifications. Written in Clojure.
 
 ## Usage
 
