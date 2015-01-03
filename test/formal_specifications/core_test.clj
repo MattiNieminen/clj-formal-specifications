@@ -1,6 +1,6 @@
-(ns clj-formal-specifications.core-test
+(ns formal-specifications.core-test
   (:require [clojure.test :refer :all]
-            [clj-formal-specifications.core :refer :all]))
+            [formal-specifications.core :refer :all]))
 
 (deftest action?-test
   (is (true? (action? {:body (+ 1 1)})))

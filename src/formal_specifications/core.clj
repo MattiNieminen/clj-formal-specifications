@@ -1,4 +1,4 @@
-(ns clj-formal-specifications.core)
+(ns formal-specifications.core)
 
 (defn action?
   "Returns true if action is a valid action with body."
