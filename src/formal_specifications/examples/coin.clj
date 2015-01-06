@@ -1,6 +1,7 @@
-(ns formal-specifications.examples.coin)
+(ns formal-specifications.examples.coin
+  (:require [formal-specifications.core :as fspec]))
 
-(defn flip-action
+(fspec/defaction flip-action
   "Function returning an action for coin flip. The body of the action returns
   either :heads or :tails. Availability is omitted (always true)."
   []

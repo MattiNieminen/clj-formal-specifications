@@ -1,6 +1,6 @@
 (ns formal-specifications.examples.coin-test
   (:require [clojure.test :refer :all]
-            [formal-specifications.core :as spec]
+            [formal-specifications.core :as fspec]
             [formal-specifications.examples.coin :refer :all]))
 
 (defn heads-or-tails?
@@ -9,4 +9,4 @@
   (some #{coin} [:heads :tails]))
 
 (deftest flip-action-test
-  (is (heads-or-tails? (spec/execute (flip-action)))))
+  (is (heads-or-tails? (fspec/execute (flip-action)))))
