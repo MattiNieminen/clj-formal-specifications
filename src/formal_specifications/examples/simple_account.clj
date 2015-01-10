@@ -14,7 +14,7 @@
   [acc amount f]
   (update-in acc [:balance] f amount))
 
-; Functions that return actions and utilize state (refs)
+; Actions that utilize state (refs)
 (fspec/defaction create-account
   []
   {:body (account 0)})
