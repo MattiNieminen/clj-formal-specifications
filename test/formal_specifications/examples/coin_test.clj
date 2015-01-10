@@ -8,5 +8,5 @@
   [coin]
   (some #{coin} [:heads :tails]))
 
-(deftest flip-action-test
+(deftest action-test
   (is (heads-or-tails? (fspec/execute (flip-action)))))
