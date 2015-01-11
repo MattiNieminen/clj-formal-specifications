@@ -76,6 +76,14 @@
   (testing "with unavailable actions"
     (is (thrown? Exception (execute (unavailable-action))))))
 
+(deftest test-execute-init
+  (testing "execution works and the state is saved to a ref"
+    (is (= (do (execute-init ref1 (available-action)) @ref1) "Hello world"))
+    (is (= (do (execute-init ref1 (available-action) not-empty) @ref1)
+           "Hello world")))
+  (testing "actions are not executed when validator returns false"
+    (is (thrown? Exception (execute-init ref1 (available-action) empty?)))))
+
 (deftest evaluation-test
   (testing ":body and :available are not called when calling action?"
     (is (true? (action? (inc-refs body-counter available-counter))))
