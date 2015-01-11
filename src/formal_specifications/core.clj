@@ -45,7 +45,7 @@
   (if (test-action action) ((:body action))))
 
 (defmacro execute-init
-  "Calls execute normally for the given action action, but stores the returned
+  "Calls execute normally for the given action, but stores the returned
   value into a ref. A var is created with the name var-name, which refers to
   the ref. An optional validator function can be given to the ref.
   See set-validator! function and Clojure documentation about refs for more
