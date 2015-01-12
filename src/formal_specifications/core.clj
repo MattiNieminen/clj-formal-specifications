@@ -40,9 +40,13 @@
 
 (defn execute
   "If action is available and well-formed, executes its body and returns the
-  result."
-  [action]
+  result. If ref is given, the return value will be also stored into the ref.
+  See execute-init for creating the ref."
+  ([action]
   (if (test-action action) ((:body action))))
+  ([action ref]
+   {:pre [(instance? clojure.lang.Ref ref)]}
+   (dosync (ref-set ref (execute action)))))
 
 (defmacro execute-init
   "Calls execute normally for the given action, but stores the returned

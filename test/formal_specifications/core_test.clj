@@ -5,27 +5,27 @@
 (defaction available-action
   []
   {:available true
-   :body "Hello world"})
+   :body "available"})
 
 (defaction unavailable-action
   []
   {:available false
-   :body "Hello world"})
+   :body "unavailable"})
 
 (defaction action-without-availability
   []
-  {:body "Hello world"})
+  {:body "without-availability"})
 
 (defaction action-with-documentation
   "This is documentation."
   []
   {:available true
-   :body "Hello world"})
+   :body "with-documentation"})
 
 (defaction action-without-body
   []
   {:available true
-   :no-body "Hello world"})
+   :no-body "without-body"})
 
 (defaction empty-action
   []
@@ -66,9 +66,9 @@
 
 (deftest test-execute
   (testing "with proper actions"
-    (is (= "Hello world" (execute (available-action))))
-    (is (= "Hello world" (execute (action-without-availability))))
-    (is (= "Hello world" (execute (action-with-documentation)))))
+    (is (= "available" (execute (available-action))))
+    (is (= "without-availability" (execute (action-without-availability))))
+    (is (= "with-documentation" (execute (action-with-documentation)))))
   (testing "with actions without executable body"
     (is (thrown? Exception (execute (action-without-body))))
     (is (thrown? Exception (execute (empty-action))))
@@ -76,13 +76,18 @@
   (testing "with unavailable actions"
     (is (thrown? Exception (execute (unavailable-action))))))
 
-(deftest test-execute-init
+(deftest execute-with-state-test
   (testing "execution works and the state is saved to a ref"
-    (is (= (do (execute-init ref1 (available-action)) @ref1) "Hello world"))
+    (is (= (do (execute-init ref1 (action-without-availability)) @ref1)
+           "without-availability"))
     (is (= (do (execute-init ref1 (available-action) not-empty) @ref1)
-           "Hello world")))
+           "available")))
   (testing "actions are not executed when validator returns false"
-    (is (thrown? Exception (execute-init ref1 (available-action) empty?)))))
+    (is (thrown? Exception
+                 (execute-init ref1 (action-with-documentation) empty?))))
+  (testing "value of the ref can be changed by calling execute"
+    (is (= (do (execute (action-without-availability) ref1) @ref1)
+           "without-availability"))))
 
 (deftest evaluation-test
   (testing ":body and :available are not called when calling action?"
