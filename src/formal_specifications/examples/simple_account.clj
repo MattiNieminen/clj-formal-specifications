@@ -1,7 +1,7 @@
 (ns formal-specifications.examples.simple-account
   (:require [formal-specifications.core :as fspec]))
 
-; Pure functions
+; Standard functions
 (defn account
   [amount]
   {:balance amount})
@@ -14,18 +14,18 @@
   [acc amount f]
   (update-in acc [:balance] f amount))
 
-; Actions that utilize state (refs)
+; Actions
 (fspec/defaction create-account
   []
   {:body (account 0)})
 
 (fspec/defaction deposit-action
   [acc amount]
-  {:body (dosync (alter acc apply-to-balance amount +))})
+  {:body (apply-to-balance acc amount +)})
 
 (fspec/defaction withdraw-action
   [acc amount]
-  {:available (>= (:balance @acc) amount)
-   :body (dosync (alter acc apply-to-balance amount -))})
+  {:available (>= (:balance acc) amount)
+   :body (apply-to-balance acc amount -)})
 
 
