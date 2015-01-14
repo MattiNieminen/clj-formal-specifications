@@ -22,7 +22,7 @@
   "Returns true if action is available for execution."
   [action]
   (if (contains? action :available)
-    (if (fn? (:available action)) ((:available action)) false)
+    (if (fn? (:available action)) (boolean ((:available action))) false)
     true))
 
 (defn- test-action
