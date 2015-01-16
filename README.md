@@ -4,7 +4,9 @@ A library for creating and executing formal specifications. Written in Clojure.
 
 ## Usage
 
-TODO
+This library exposes all of Clojure to writing good formal specifications.
+It is usually a good idea to use namespaces just as you would use them
+in normal Clojure project.
 
 ## License
 
