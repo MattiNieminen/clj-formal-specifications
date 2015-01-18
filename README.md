@@ -1,4 +1,4 @@
-# formal-specifications
+# clj-formal-specifications
 
 A library for creating and executing formal specifications. Written in Clojure.
 
