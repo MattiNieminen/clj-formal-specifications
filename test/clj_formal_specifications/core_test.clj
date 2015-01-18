@@ -1,6 +1,6 @@
-(ns formal-specifications.core-test
+(ns clj-formal-specifications.core-test
   (:require [clojure.test :refer :all]
-            [formal-specifications.core :refer :all]))
+            [clj-formal-specifications.core :refer :all]))
 
 (defaction available-action
   []

@@ -1,7 +1,7 @@
-(ns formal-specifications.examples.shared-account-test
+(ns clj-formal-specifications.examples.shared-account-test
   (:require [clojure.test :refer :all]
-            [formal-specifications.examples.shared-account :refer :all]
-            [formal-specifications.core :as fspec]))
+            [clj-formal-specifications.examples.shared-account :refer :all]
+            [clj-formal-specifications.core :as fspec]))
 
 (deftest function-test
   (testing "creating a person"

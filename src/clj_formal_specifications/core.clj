@@ -1,4 +1,4 @@
-(ns formal-specifications.core)
+(ns clj-formal-specifications.core)
 
 (defmacro defaction
   "Like defn in style, but is used to define functions that return executable

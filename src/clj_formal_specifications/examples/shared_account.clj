@@ -1,5 +1,5 @@
-(ns formal-specifications.examples.shared-account
-  (:require [formal-specifications.core :as fspec]))
+(ns clj-formal-specifications.examples.shared-account
+  (:require [clj-formal-specifications.core :as fspec]))
 
 ; Standard functions
 (defn person

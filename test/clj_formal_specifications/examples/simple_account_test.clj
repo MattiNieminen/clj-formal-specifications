@@ -1,7 +1,7 @@
-(ns formal-specifications.examples.simple-account-test
+(ns clj-formal-specifications.examples.simple-account-test
   (:require [clojure.test :refer :all]
-            [formal-specifications.examples.simple-account :refer :all]
-            [formal-specifications.core :as fspec]))
+            [clj-formal-specifications.examples.simple-account :refer :all]
+            [clj-formal-specifications.core :as fspec]))
 
 (deftest function-test
   (testing "creating an account"
