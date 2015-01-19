@@ -156,7 +156,7 @@ things later if the specification is transformed into the implementation.
 ```execute``` with refs. Instead, make actions that take refs as parameters and
 wrap your ```:body``` in ```(dosync ...)```. See [shared account example]
 (https://github.com/MattiNieminen/formal-specifications/blob/master/src/formal_specifications/examples/shared_account.clj)
- for details. Remember: actions should be atomic in terms of the specification! 
+ for details. Remember: actions should be atomic in terms of the specification!
 
 * Layer your specifications properly: write normal pure functions and favor
 higher-order functions. Then, write actions into a separate layer that utilizes
@@ -173,7 +173,7 @@ changes. Imagine writing "regression tests" for the specifications. Cool!
 
 ## License
 
-Copyright © 2014 Matti Nieminen
+Copyright © 2015 Matti Nieminen
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
