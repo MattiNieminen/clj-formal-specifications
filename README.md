@@ -74,7 +74,7 @@ When an action is created, it is expanded into a function where
 ```:available``` and ```:body``` are transformed into closures. This
 methodology is used to achieve two goals:
 
-* Side-effects are allows in actions as they are not executed just by
+* Side-effects are allowed in actions as they are not executed just by
 evaluating the action. For example, just by calling ```available``` for
 certain action does not evaluate its ```:body```.
 
