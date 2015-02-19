@@ -7,10 +7,11 @@
   closures."
   ([name args action-map]
    {:pre [(map? action-map)]}
-   `(defn ~name ~args ~(reduce-kv #(assoc %1 %2 `(fn [] ~%3)) {} action-map)))
+   `(defn ~(with-meta name {:action true}) ~args
+      ~(reduce-kv #(assoc %1 %2 `(fn [] ~%3)) {} action-map)))
   ([name doc-string args action-map]
    {:pre [(map? action-map) (string? doc-string)]}
-   `(defn ~name ~doc-string ~args
+   `(defn ~(with-meta name {:action true}) ~doc-string ~args
       ~(reduce-kv #(assoc %1 %2 `(fn [] ~%3)) {} action-map))))
 
 (defn action?

@@ -98,3 +98,7 @@
     (is (true? (available? (inc-refs body-counter available-counter))))
     (is (= 0 @body-counter))
     (is (= 1 @available-counter))))
+
+(deftest metadata-test
+  (testing "actions can be identified as actions by their metadata"
+    (is (true? (:action (meta #'available-action))))))
