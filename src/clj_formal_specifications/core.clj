@@ -56,6 +56,8 @@
   See set-validator! function and Clojure documentation about refs for more
   details."
   ([var-name action-expr]
-  `(def ~var-name (ref (execute ~action-expr))))
+  `(def ~var-name (ref (execute ~action-expr) :meta {:spec-ref true})))
   ([var-name action-expr validator]
-   `(def ~var-name (ref (execute ~action-expr) :validator ~validator))))
+   `(def ~var-name (ref (execute ~action-expr)
+                        :validator ~validator
+                        :meta {:spec-ref true}))))

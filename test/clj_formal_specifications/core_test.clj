@@ -101,4 +101,8 @@
 
 (deftest metadata-test
   (testing "actions can be identified as actions by their metadata"
-    (is (true? (:action (meta #'available-action))))))
+    (is (true? (:action (meta #'available-action)))))
+  (testing "refs created with execute-init contain specific metadata"
+    (is (true? (do
+                 (execute-init ref1 (available-action))
+                 (:spec-ref (meta ref1)))))))
