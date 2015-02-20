@@ -50,7 +50,7 @@ whether or not object is a proper action:
 (action dice-throw)
 
 ; Correct! Returns true!
-(action? (dice-throw 2))  ; => Returns true
+(action? (dice-throw 2))
 ```
 
 The key ```:available``` is used to enable or disable the action in a certain
@@ -87,7 +87,8 @@ is a special function for executing the actions called ```execute```. It works
 like this:
 
 ```clojure
-(execute (dice-throw 5)) ; => Returns a number between 5 and 30
+; Returns a number between 5 and 30
+(execute (dice-throw 5))
 ```
 
 This call will find the closure from ```:body``` and executes it. It may
@@ -103,7 +104,7 @@ called ```execute-init```. This function simply creates a var pointing to a
 ref, executes the given action and stores its return value into the newly
 created ref.
 
-It is also possible to give ```execute-init```a validator
+It is also possible to give ```execute-init``` a validator
 function, which is given to the ref as a normal validator function. The
 validator is a great way to make sure that the availability of action is
 defined correctly for every action; if a change to a ref fails due to the
@@ -132,6 +133,22 @@ result of the previous throw:
 (execute (dice-throw @throw-result) throw-result)
 ; Once more
 (execute (dice-throw @throw-result) throw-result)
+```
+
+Sometimes, for example when embedding formal specifications to other
+applications, it is necessary to separate actions from normal functions
+and refs created with ```execute-init``` from other refs. For this reason,
+```defaction``` and ```execute-init``` macros insert metadata to their
+returned results. The metadata of an action contains a key/value pair
+```:action true```. Similarly, refs creates with ```execute-init``` have
+```:spec-ref true``` in their metadata:
+
+```clojure
+; Retuns a huge map like {... :action true  ...}
+(meta #'dice-throw)
+
+; Returns {:spec-ref true}
+(meta throw-result)
 ```
 
 For now, that is all. See [example specifications]
