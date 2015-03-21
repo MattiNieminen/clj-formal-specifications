@@ -1,4 +1,4 @@
-(defproject clj-formal-specifications "1.1.0"
+(defproject clj-formal-specifications "1.2.0"
   :description "A library for creating and executing formal
   specifications."
   :url "https://github.com/MattiNieminen/clj-formal-specifications"
