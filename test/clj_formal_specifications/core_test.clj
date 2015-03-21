@@ -105,4 +105,4 @@
   (testing "refs created with execute-init contain specific metadata"
     (is (true? (do
                  (execute-init ref1 (available-action))
-                 (:spec-ref (meta ref1)))))))
+                 (:spec-ref (meta #'ref1)))))))
