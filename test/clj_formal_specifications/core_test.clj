@@ -90,11 +90,11 @@
            "without-availability"))))
 
 (deftest evaluation-test
-  (testing ":body and :available are not called when calling action?"
+  (testing ":body and :available are not evaluated when calling action?"
     (is (true? (action? (inc-refs body-counter available-counter))))
     (is (= 0 @body-counter))
     (is (= 0 @available-counter)))
-  (testing ":body is not called when calling available?"
+  (testing ":body is not evaluated when calling available?"
     (is (true? (available? (inc-refs body-counter available-counter))))
     (is (= 0 @body-counter))
     (is (= 1 @available-counter))))
