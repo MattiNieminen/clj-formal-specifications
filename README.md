@@ -106,7 +106,7 @@ created ref.
 
 It is also possible to give ```execute-init``` a validator
 function, which is given to the ref as a normal validator function. The
-validator is a great way to make sure that the availability of action is
+validator is a great way to make sure that the availability of an action is
 defined correctly for every action; if a change to a ref fails due to the
 validator, the current version of the formal specification is incomplete as it
 can lead to an unwanted state of the application. In summary,
@@ -117,9 +117,10 @@ can lead to an unwanted state of the application. In summary,
 ```
 
 After the ref is created, the value can be changed just by calling
-```execute``` with the ref added to the function call. For example, consider
-the scenario where a set of dice is thrown where the amount of dice is the
-result of the previous throw:
+```execute``` with the ref added to the function call. If a validator has been
+set by execute-init, it will keep working after the new value is set. For
+example, consider a scenario where a set of dice is thrown where the amount of
+dice is the result of the previous throw:
 
 ```clojure
 (defn valid-dice-throw?
@@ -138,24 +139,24 @@ result of the previous throw:
 Sometimes, for example when embedding formal specifications to other
 applications, it is necessary to separate actions from normal functions
 and refs created with ```execute-init``` from other refs. For this reason,
-```defaction``` and ```execute-init``` macros insert metadata to their
-returned results. The metadata of an action contains a key/value pair
-```:action true```. Similarly, refs creates with ```execute-init``` have
+```defaction``` and ```execute-init``` macros insert metadata to the created
+vars. The metadata of a var pointing to an action contains a key/value pair
+```:action true```. Similarly, vars creates with ```execute-init``` have
 ```:spec-ref true``` in their metadata:
 
 ```clojure
-; Retuns a huge map like {... :action true  ...}
+; Retuns a huge map containing :action true
 (meta #'dice-throw)
 
-; Returns {:spec-ref true}
-(meta throw-result)
+; Retuns a huge map containing :spec-ref true
+(meta #'throw-result)
 ```
 
 For now, that is all. See [example specifications]
 (https://github.com/MattiNieminen/formal-specifications/tree/master/src/formal_specifications/examples)
 and their [tests]
 (https://github.com/MattiNieminen/formal-specifications/tree/master/test/formal_specifications/examples)
- for further reference.
+for further reference.
 
 ## Tips for writing good formal specifications
 
@@ -169,24 +170,25 @@ details, and avoid writing specifications about parts of the software that can
 be described unambiguously with natural languages. You can always do those
 things later if the specification is transformed into the implementation.
 
-* In case you need to to modify multiple refs in one action, dont use
-```execute``` with refs. Instead, make actions that take refs as parameters and
-wrap your ```:body``` in ```(dosync ...)```. See [shared account example]
+* In case you need to to modify multiple refs atomically in one action, dont
+use ```execute``` with refs. Instead, make actions that take refs as arguments
+and wrap your ```:body``` in ```(dosync ...)```. See [shared account example]
 (https://github.com/MattiNieminen/formal-specifications/blob/master/src/formal_specifications/examples/shared_account.clj)
- for details. Remember: actions should be atomic in terms of the specification!
+for details. Remember: actions should be atomic in the specification!
 
 * Layer your specifications properly: write normal pure functions and favor
 higher-order functions. Then, write actions into a separate layer that utilizes
 the pure functions. This way most of the logic is reusable. If your transaction
 logic gets complicated, you may consider using another layer for just the
 transactions. This approach results in three-tier architecture: pure functions,
-atomic transactions and actions.
+atomic transactions and actions. You may notice that big parts of your
+specification are usable in the implementation.
 
 * Consider writing unit tests for both actions and the pure functions. Testing
 pure functions assures that no mistakes have been made in the behaviour of the
 functions (normal unit testing). Testing actions effectively creates a "use
 case" from the specification, that can be tested when the specification
-changes. Imagine writing "regression tests" for the specifications. Cool!
+changes. Think of writing "regression tests" for the specifications. Cool!
 
 ## License
 
