@@ -31,5 +31,3 @@
   [acc amount]
   {:available (>= (:balance acc) amount)
    :body (apply-to-balance acc amount -)})
-
-
