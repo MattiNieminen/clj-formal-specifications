@@ -1,5 +1,5 @@
 (ns clj-formal-specifications.examples.simple-account
-  (:require [clj-formal-specifications.core :as fspec]))
+  (:require [clj-formal-specifications.core :refer :all]))
 
 ; Standard functions
 (defn account
@@ -17,15 +17,15 @@
   (update-in acc [:balance] f amount))
 
 ; Actions
-(fspec/defaction create-account
+(defaction create-account
   []
   {:body (account 0)})
 
-(fspec/defaction deposit-action
+(defaction deposit-action
   [acc amount]
   {:body (apply-to-balance acc amount +)})
 
-(fspec/defaction withdraw-action
+(defaction withdraw-action
   "Decreaces the balance of an account unless the balance would become
   negative."
   [acc amount]

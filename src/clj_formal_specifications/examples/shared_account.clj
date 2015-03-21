@@ -1,5 +1,5 @@
 (ns clj-formal-specifications.examples.shared-account
-  (:require [clj-formal-specifications.core :as fspec]))
+  (:require [clj-formal-specifications.core :refer :all]))
 
 ; Standard functions
 (defn person
@@ -31,18 +31,18 @@
   (update-in acc [:balance] f amount))
 
 ; Actions
-(fspec/defaction create-person
+(defaction create-person
   [id amount]
   {:body (person id amount)})
 
-(fspec/defaction create-account
+(defaction create-account
   "Creates an account with owners from the :id of owners-refs, if owner-refs
   is a collection and not empty."
   [owner-refs]
   {:available (and (coll? owner-refs) (not (empty? owner-refs)))
    :body (account 0 (map (comp :id deref) owner-refs))})
 
-(fspec/defaction withdraw
+(defaction withdraw
   "Transfers money from an account to a person, if the person owns the
   account and the account has enough balance."
   [account-ref person-ref amount]
@@ -51,7 +51,7 @@
    :body (dosync (alter account-ref apply-to-balance amount -)
                  (alter person-ref apply-to-wallet amount +))})
 
-(fspec/defaction deposit
+(defaction deposit
   "Transfers money from a person to an account, if the person has enough
   money."
   [account-ref person-ref amount]
