@@ -47,7 +47,7 @@ whether or not object is a proper action:
 
 ```clojure
 ; Wrong! Don't do this!
-(action dice-throw)
+(action? dice-throw)
 
 ; Correct! Returns true!
 (action? (dice-throw 2))
