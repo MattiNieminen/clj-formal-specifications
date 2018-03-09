@@ -152,11 +152,9 @@ vars. The metadata of a var pointing to an action contains a key/value pair
 (meta #'throw-result)
 ```
 
-For now, that is all. See [example specifications]
-(https://github.com/MattiNieminen/formal-specifications/tree/master/src/formal_specifications/examples)
-and their [tests]
-(https://github.com/MattiNieminen/formal-specifications/tree/master/test/formal_specifications/examples)
-for further reference.
+For now, that is all. See [example
+specifications](src/clj_formal_specifications/examples) and their
+[tests](test/clj_formal_specifications/examples) for further reference.
 
 ## Tips for writing good formal specifications
 
@@ -172,8 +170,7 @@ things later if the specification is transformed into the implementation.
 
 * In case you need to to modify multiple refs atomically in one action, dont
 use ```execute``` with refs. Instead, make actions that take refs as arguments
-and wrap your ```:body``` in ```(dosync ...)```. See [shared account example]
-(https://github.com/MattiNieminen/formal-specifications/blob/master/src/formal_specifications/examples/shared_account.clj)
+and wrap your ```:body``` in ```(dosync ...)```. See [shared account example](src/clj_formal_specifications/examples/shared_account.clj)
 for details. Remember: actions should be atomic in the specification!
 
 * Layer your specifications properly: write normal pure functions and favor
